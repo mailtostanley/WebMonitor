@@ -1,0 +1,4 @@
+http://x.sensoro.com/login
+http://x.sensoro.com/cloud/dashboard
+https://manage.sensoro.com/login
+https://manage.sensoro.com/manage/shops?page=1
