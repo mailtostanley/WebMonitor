@@ -3,6 +3,7 @@
 
 import httplib2
 import base64
+import os
 from sendEmail import sendEmail
 from multiprocessing.dummy import Pool as ThreadPool
 from time import sleep
@@ -40,7 +41,9 @@ def sendAPI(url):
 
 def getApiList():
     try:
-        apiFile = open("./get_api.txt", "r")
+        path = os.getcwd()
+        filePath = os.path.join(path, "get_api.txt")
+        apiFile = open(filePath, "r")
         apiList = []
         for line in apiFile:
             apiList.append(line.strip())
@@ -63,9 +66,9 @@ def main():
     pool.join()
 
 if __name__ == "__main__":
-    # apiList = getApiList()
-    # for i in apiList:
-    #     print i
+    apiList = getApiList()
+    for i in apiList:
+        print i
     # url = "http://www.sensoro.xxm/axc"
     # sendAPI(url)
-    main()
+    # main()
