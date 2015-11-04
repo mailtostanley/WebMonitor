@@ -1,4 +1,12 @@
 http://x.sensoro.com/login
 http://x.sensoro.com/cloud/dashboard
+http://x.sensoro.com/cloud/appstore/face
+http://x.sensoro.com/cloud/appstore/box
+http://x.sensoro.com/cloud/appstore/menu
+http://x.sensoro.com/cloud/appstore/adcolumn
+http://x.sensoro.com/cloud/appstore/article
+http://x.sensoro.com/cloud/appstore/follow
+http://x.sensoro.com/cloud/appstore/chat
+http://x.sensoro.com/cloud/appstore/lottery
 https://manage.sensoro.com/login
 https://manage.sensoro.com/manage/shops?page=1
