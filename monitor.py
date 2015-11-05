@@ -3,12 +3,22 @@
 
 import httplib2
 import base64
+import logging
 import os
 from sendEmail import sendEmail
 from multiprocessing.dummy import Pool as ThreadPool
 from time import sleep
 httplib2.debuglevel = 1
 
+path = os.getcwd()
+logPath = os.path.join(path, "monitor.log")
+logger = logging.getLogger("monitorlogger")
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(logPath)
+formatter = logging.Formatter(
+    '[%(asctime)s] %(levelname)s: %(filename)s: %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 def sendAPI(url):
     # we will totall try 3 times if send api fails
@@ -34,6 +44,8 @@ def sendAPI(url):
             if retryCount > 0:
                 retryCount -= 1
                 continue
+            logger.error("Send API error.")
+            logger.error("Exception: %s" % e)
             msg = "There is server API error. The URL is: %s.\r\n Exception is: %s." % (url, e)
             sendEmail(msg)
             sleep(3600)
@@ -49,8 +61,8 @@ def getApiList():
             apiList.append(line.strip())
         return apiList
     except Exception, e:
-        print "Can not open get_api.txt file."
-        print "Exception details: %s" % e
+        logger.error("Can not open get_api.txt file.")
+        logger.error("Exception: %s" % e)
 
 def parseResponse(response):
     if response['status'] == "200":
@@ -59,11 +71,16 @@ def parseResponse(response):
         return False
 
 def main():
-    apiList = getApiList()
-    pool = ThreadPool(len(apiList))
-    pool.map(sendAPI, apiList)
-    pool.close()
-    pool.join()
+    
+    try:
+        apiList = getApiList()
+        pool = ThreadPool(len(apiList))
+        pool.map(sendAPI, apiList)
+        pool.close()
+        pool.join()
+    except Exception, e:
+        logger.error("A exception is occourred.")
+        logger.error("Exception: %s" % e)
 
 if __name__ == "__main__":
     # apiList = getApiList()
