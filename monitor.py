@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import httplib2
-import os
 import base64
+import os
 from sendEmail import sendEmail
 from multiprocessing.dummy import Pool as ThreadPool
 from time import sleep
@@ -41,7 +41,7 @@ def sendAPI(url):
 
 def getApiList():
     try:
-	path = os.getcwd()
+        path = os.getcwd()
         filePath = os.path.join(path, "get_api.txt")
         apiFile = open(filePath, "r")
         apiList = []
