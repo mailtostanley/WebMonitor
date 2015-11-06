@@ -11,6 +11,13 @@ class LogEntryParser():
         time = re.findall(time_re, self.logEntry)[0]
         return time.split(' ')[0]
 
+    def getTimeMin(self):
+        time_re = re.compile(r'\[(.*?)\]')
+        time = re.findall(time_re, self.logEntry)[0]
+        return time.split(' ')[0][:-3]
+
+    def getUserAgent(self):
+        pass
 
 if __name__ == '__main__':
     logEntry = '123.151.42.50 - - [01/Nov/2015:06:57:43 +0800]\
@@ -22,4 +29,4 @@ if __name__ == '__main__':
     Safari/533.1 MicroMessenger/6.2.5.53_r2565f18.621 NetType/WIFI Language/zh_CN" \
     "1.26.197.247" - - - -'
     parser = LogEntryParser(logEntry)
-    print parser.getTime()
+    print parser.getTimeMin()

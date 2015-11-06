@@ -67,6 +67,8 @@ def getApiList():
     except Exception, e:
         logger.error("Can not open get_api.txt file.")
         logger.error("Exception: %s" % e)
+    finally:
+        apiFile.close()
 
 def parseResponse(response):
     if response['status'] == "200":
@@ -90,6 +92,6 @@ if __name__ == "__main__":
     # apiList = getApiList()
     # for i in apiList:
     #     print i
-    # url = "http://www.sensoro.xxm/axc"
-    # sendAPI(url)
-    main()
+    url = "http://www.sensoro.xxm/axc"
+    sendAPI(url)
+    # main()
