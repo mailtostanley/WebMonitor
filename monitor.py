@@ -43,6 +43,10 @@ def sendAPI(url):
         except Exception, e:
             if retryCount > 0:
                 retryCount -= 1
+                logger.warning("Exception: %s" % e)
+                logger.warning("Send API retry...")
+                sleep(10)
+                http = httplib2.Http(timeout=10)
                 continue
             logger.error("Send API error.")
             logger.error("Exception: %s" % e)
