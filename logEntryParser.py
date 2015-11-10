@@ -16,6 +16,14 @@ class LogEntryParser():
         time = re.findall(time_re, self.logEntry)[0]
         return time.split(' ')[0][:-3]
 
+    def getPath(self):
+        path_re = re.compile(r'GET (.*?) HTTP/1.1')
+        result = re.findall(path_re, self.logEntry)
+        if len(result) != 0:
+            return result[0]
+        else:
+            return ''
+
     def getUserAgent(self):
         pass
 
@@ -29,4 +37,4 @@ if __name__ == '__main__':
     Safari/533.1 MicroMessenger/6.2.5.53_r2565f18.621 NetType/WIFI Language/zh_CN" \
     "1.26.197.247" - - - -'
     parser = LogEntryParser(logEntry)
-    print parser.getTimeMin()
+    print parser.getPath()

@@ -45,13 +45,15 @@ def sendAPI(url):
                 retryCount -= 1
                 logger.warning("Exception: %s" % e)
                 logger.warning("Send API retry...")
-                sleep(10)
+                sleep(30)
                 http = httplib2.Http(timeout=10)
                 continue
             logger.error("Send API error.")
             logger.error("Exception: %s" % e)
             msg = "There is server API error. The URL is: %s.\r\n Exception is: %s." % (url, e)
             sendEmail(msg)
+            # we need to reset retryCount here
+            retryCount = 3
             sleep(3600)
             continue
 
