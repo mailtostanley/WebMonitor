@@ -94,6 +94,6 @@ if __name__ == "__main__":
     # apiList = getApiList()
     # for i in apiList:
     #     print i
-    url = "http://www.sensoro.xxm/axc"
-    sendAPI(url)
-    # main()
+    # url = "http://www.sensoro.xxm/axc"
+    # sendAPI(url)
+    main()
