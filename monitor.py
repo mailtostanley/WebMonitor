@@ -40,6 +40,10 @@ def sendAPI(url):
             if not parseResponse(res):
                 raise Exception("Response is not correct.")
             sleep(300)
+        except httplib2.ServerNotFoundError, e:
+            if e.find("Name or service not known") != -1:
+                sleep(300)
+                continue
         except Exception, e:
             if retryCount > 0:
                 retryCount -= 1
